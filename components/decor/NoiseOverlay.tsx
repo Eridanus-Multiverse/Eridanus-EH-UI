@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Platform } from "react-native";
 import { useThemeTokens } from "../../hooks/useTheme";
 
 export default function NoiseOverlay() {
   const theme = useThemeTokens();
   const enabled = theme.decor.noiseOverlay ?? false;
-  const [healTick, setHealTick] = useState(0);
 
   useEffect(() => {
     if (Platform.OS !== "web" || !enabled) return;
@@ -75,7 +74,7 @@ export default function NoiseOverlay() {
       }
     `;
     return () => { if (style) style.textContent = ""; };
-  }, [enabled, healTick]);
+  }, [enabled]);
 
   useEffect(() => {
     if (Platform.OS !== "web" || !enabled) return;
@@ -89,31 +88,6 @@ export default function NoiseOverlay() {
     el.dataset.noisedark = "1";
     document.body.appendChild(el);
     return () => { el.remove(); };
-  }, [enabled, healTick]);
-
-  // 自愈哨兵（2026-07-08）：iOS WebKit 会在内存压力/后台切换时丢弃 fixed
-  // 合成层或清掉注入的 style——回到前台时检查两件套还在不在，缺了就重建。
-  useEffect(() => {
-    if (Platform.OS !== "web" || !enabled) return;
-    const heal = () => {
-      const style = document.getElementById("noise-grain-css") as HTMLStyleElement | null;
-      if (style && !style.textContent) {
-        // 触发上面的注入 effect 重跑代价大——直接踢一脚布局让层重建
-        style.remove();
-      }
-      const dark = document.getElementById("noise-darkgrain") as HTMLElement | null;
-      if (dark) {
-        // re-append 强制 WebKit 重建该合成层（同节点移动不丢状态）
-        dark.parentElement?.appendChild(dark);
-      }
-      setHealTick((t) => t + 1); // 让注入 effect 重新核对 style 存在性
-    };
-    document.addEventListener("visibilitychange", heal);
-    window.addEventListener("pageshow", heal);
-    return () => {
-      document.removeEventListener("visibilitychange", heal);
-      window.removeEventListener("pageshow", heal);
-    };
   }, [enabled]);
 
   return null;

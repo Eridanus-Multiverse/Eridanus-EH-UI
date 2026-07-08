@@ -57,7 +57,7 @@ Room    = { id, name, members: { id, name, role }[] }
 | **HudHeader** | `components/chat/HudHeader.tsx` | 聊天页 HUD 仪表头（波形 / 读数 / 状态灯） |
 | **WelcomeScreen** | `components/WelcomeScreen.tsx` | 开屏：打字机标题 + 系统自检清单 + 进度格 |
 | **EhParts** | `components/decor/EhParts.tsx` | 装饰件族：外框 / 斜线纹 / 徽记 / 六角坐标 |
-| **NoiseOverlay** | `components/decor/NoiseOverlay.tsx` | 三层胶片噪点覆层（粗粒/细粒/暗蚀）——EH 质感的灵魂；含 iOS WebKit 丢层自愈哨兵与亮色房间 `useNoiseFree` 挂起钩子 |
+| **NoiseOverlay** | `components/decor/NoiseOverlay.tsx` | 三层胶片噪点覆层（粗粒/细粒/暗蚀）——EH 质感的灵魂；含亮色房间 `useNoiseFree` 挂起钩子 |
 | **CrtScanlines** | `components/decor/CrtScanlines.tsx` | CRT 扫描线覆层 |
 | **CornerBrackets** | `components/decor/CornerBrackets.tsx` | 四角括号 |
 | **Terminal view** | `app/(tabs)/terminal.tsx` | tmux 终端镜像页（ANSI 渲染 / 断线重连） |
