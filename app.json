@@ -1,0 +1,57 @@
+{
+  "expo": {
+    "name": "Event Horizon",
+    "slug": "event-horizon-demo",
+    "scheme": "ehdemo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.example.eventhorizon",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#080c18",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "backgroundColor": "#000000"
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": "production",
+          "default": false
+        }
+      },
+      "eas": {
+        "projectId": "384b961e-be96-4160-b726-6ab4d59f6094"
+      }
+    },
+    "experiments": {
+      "baseUrl": "/eh-demo"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font",
+      "expo-secure-store",
+      "expo-splash-screen"
+    ],
+    "owner": "eridanus459",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/384b961e-be96-4160-b726-6ab4d59f6094"
+    }
+  }
+}
