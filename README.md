@@ -73,4 +73,4 @@ Room    = { id, name, members: { id, name, role }[] }
 
 ## License
 
-Apache 2.0 © Eridanus-Multiverse — see [LICENSE](LICENSE)
+AGPL-3.0 © Eridanus-Multiverse — see [LICENSE](LICENSE)
