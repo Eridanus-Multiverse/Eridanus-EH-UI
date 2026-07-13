@@ -271,6 +271,26 @@ export default function TabLayout() {
       document.head.appendChild(meta);
     }
     meta.content = color;
+
+    const motionId = "eh-motion-css";
+    if (!document.getElementById(motionId)) {
+      const style = document.createElement("style");
+      style.id = motionId;
+      style.textContent = [
+        ":root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); --dur-fast: 150ms; --dur-normal: 250ms; --dur-slow: 350ms; }",
+        "@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.15s !important; animation-iteration-count: 1 !important; transition-duration: 0.15s !important; } }",
+        "* { scrollbar-width: none; -ms-overflow-style: none; } *::-webkit-scrollbar { display: none; }",
+        "@keyframes voyCardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }",
+        "[data-voy-card] { animation: voyCardIn 400ms cubic-bezier(0.23,1,0.32,1) both; }",
+        "[data-voy-btn='1'] { transition: transform 100ms ease-out, opacity 100ms ease; }",
+        "[data-voy-btn='1']:active { transform: scale(0.90) !important; opacity: 0.7 !important; }",
+        "[data-voy-event] { transition: transform 150ms ease-out; }",
+        "[data-voy-event]:active { transform: scale(0.98) !important; }",
+        "@keyframes commCardIn { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }",
+        "[data-comm-card='1'] { animation: commCardIn 350ms cubic-bezier(0.23,1,0.32,1) both; }",
+      ].join("\n");
+      document.head.appendChild(style);
+    }
   }, [theme]);
 
   useEffect(() => {

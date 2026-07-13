@@ -78,7 +78,7 @@ function injectPageCSS() {
 const textShadowGold = Platform.OS === "web" ? { textShadow: "0 0 40px rgba(238,195,116,0.45)" } as any : {};
 const textShadowH1 = Platform.OS === "web" ? { textShadow: "2px 2px 0 rgba(0,0,0,0.8), 0 0 20px rgba(238,195,116,0.38)" } as any : {};
 
-type InternalTab = "home" | "epsilon" | "calendar" | "memory" | "memory_epsilon" | "memory_cursa" | "feels" | "dreams";
+type InternalTab = "home" | "epsilon" | "calendar" | "memory" | "memory_epsilon" | "memory_cursa" | "feels" | "dreams" | "starsky";
 
 
 const WEATHER_CITIES: { key: string | null; label: string }[] = [
@@ -98,6 +98,7 @@ const NAV_ENTRIES: { key: InternalTab; icon: string; title: string; desc: string
   { key: "epsilon", icon: "◈", title: "FLIGHT LOG", desc: "状态 · 星图 · 航行事件 · 碎碎念" },
   { key: "calendar", icon: "◇", title: "星历", desc: "时间轴 · 心情 · 航行日记 · 周报" },
   { key: "memory", icon: "⬡", title: "本机记忆", desc: "核心 · 关系 · 日记 · 技术" },
+  { key: "starsky", icon: "✦", title: "星域总览", desc: "知识图谱 · 引力线 · 星座" },
 ];
 
 // ============ Event Horizon home (web only) ============
@@ -562,7 +563,7 @@ export default function AchernarScreen() {
   }
 
   if (activeTab !== "home") {
-    const tabLabel = activeTab === "epsilon" ? "FLIGHT LOG" : activeTab === "calendar" ? "星历" : activeTab === "feels" ? "核心舱" : activeTab === "dreams" ? "昨夜的梦" : activeTab === "memory_epsilon" ? "A 记忆库" : activeTab === "memory_cursa" ? "B 记忆库" : "本机记忆";
+    const tabLabel = activeTab === "epsilon" ? "FLIGHT LOG" : activeTab === "calendar" ? "星历" : activeTab === "feels" ? "核心舱" : activeTab === "dreams" ? "昨夜的梦" : activeTab === "starsky" ? "星域总览" : activeTab === "memory_epsilon" ? "A 记忆库" : activeTab === "memory_cursa" ? "B 记忆库" : "本机记忆";
     return (
       <View style={[s.container, isEH && { backgroundColor: "#000" }, { paddingTop: insets.top }]}>
         {isEH ? <EhHomeSky /> : <AchernarSky />}
@@ -652,6 +653,12 @@ export default function AchernarScreen() {
         {activeTab === "memory_cursa" && <CursaMemory onBack={() => setActiveTab("memory")} />}
         {activeTab === "feels" && <FeelsView items={feelsMemories} loading={feelsLoading} />}
         {activeTab === "dreams" && <AchernarDreams />}
+        {activeTab === "starsky" && (
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 40 }}>
+            <Text style={{ fontFamily: fonts.silkscreen, fontSize: 14, color: "rgba(255,255,255,0.6)", letterSpacing: 4, marginBottom: 12 }}>STAR DOMAIN</Text>
+            <Text style={{ fontFamily: fonts.pixel, fontSize: 12, color: "rgba(255,255,255,0.35)", textAlign: "center", lineHeight: 22 }}>知识图谱 · 引力线 · 星座{"\n"}接入后端数据后亮起</Text>
+          </View>
+        )}
       </View>
     );
   }
